@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      html {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        background: black;
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+      }
+
+      p {
+        display: inline-block;
+        padding: 1em;
+        background: red;
+        color: white;
+      }
+
+      title {
+        font-size: 2em;
+        display: block;
+        color: white;
+        top: 0;
+        padding: 1em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <title>Loading...</title>
+    <noscript>This site <strong>REQUIRES</strong> JavaScript.</noscript>
+    <script>
+      fetch('https://launchermeta.mojang.com/mc/game/version_manifest.json')
+        .then(res => res.json())
+        .then(({ latest: { release, snapshot } }) => {
+          document.title = `Has Minecraft 1.16 released yet?`
+          const num = release.split('.')
+          if (num[1] >= 16) {
+            const p = document.createElement('p')
+            p.innerText = `YES.
+          Current version: ${release}`
+            document.body.appendChild(p)
+          } else {
+            const p = document.createElement('p')
+            p.innerText = `NO.
+          Current version: ${release}`
+            document.body.appendChild(p)
+          }
+        })
+
+    </script>
+  </body>
+
+</html>
